@@ -1,0 +1,453 @@
+:root {
+    --stock-navy: #071f43;
+    --stock-blue: #175fc2;
+    --stock-light: #f5f7fb;
+    --stock-border: #dde5ef;
+    --stock-text: #10213d;
+    --stock-muted: #667085;
+    --stock-white: #ffffff;
+}
+
+body{
+    background:var(--stock-light);
+    color:var(--stock-text);
+    font-family:Segoe UI,Tahoma,Geneva,Verdana,sans-serif;
+}
+
+/* NAVBAR */
+
+.stock-navbar{
+    background:linear-gradient(135deg,#071f43,#10366c);
+}
+
+.stock-navbar .navbar-brand{
+    font-weight:700;
+    letter-spacing:1px;
+}
+
+.stock-navbar .nav-link{
+    color:white !important;
+}
+
+.stock-navbar .btn{
+    border-radius:10px;
+}
+
+/* HERO */
+
+.dashboard-hero{
+    background:white;
+    border-bottom:1px solid var(--stock-border);
+}
+
+.section-label{
+    color:var(--stock-blue);
+    font-weight:bold;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    font-size:.8rem;
+}
+
+.hero-illustration{
+
+    width:220px;
+    height:220px;
+
+    border-radius:50%;
+    border:2px solid var(--stock-border);
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    margin:auto;
+
+}
+
+.hero-illustration i{
+
+    font-size:90px;
+    color:var(--stock-navy);
+
+}
+
+/* BUTTONS */
+
+.btn-stock{
+
+    background:var(--stock-navy);
+    color:white;
+
+}
+
+.btn-stock:hover{
+
+    background:#10366c;
+    color:white;
+
+}
+
+.btn-outline-stock{
+
+    border:2px solid var(--stock-navy);
+    color:var(--stock-navy);
+
+}
+
+.btn-outline-stock:hover{
+
+    background:var(--stock-navy);
+    color:white;
+
+}
+
+/* CARDS */
+
+.stat-card,
+.content-card{
+
+    background:white;
+
+    border-radius:15px;
+
+    padding:25px;
+
+    box-shadow:0 10px 25px rgba(0,0,0,.05);
+
+}
+
+.stat-card{
+
+    display:flex;
+    gap:20px;
+    align-items:center;
+
+}
+
+.stat-icon{
+
+    width:70px;
+    height:70px;
+
+    border-radius:50%;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    font-size:28px;
+
+}
+
+.stat-icon-blue{
+
+    background:#e9f2ff;
+    color:#175fc2;
+
+}
+
+.stat-icon-green{
+
+    background:#ebfff2;
+    color:#2b9348;
+
+}
+
+.stat-icon-gold{
+
+    background:#fff7e3;
+    color:#b8860b;
+
+}
+
+.stat-label{
+
+    color:gray;
+    margin-bottom:5px;
+
+}
+
+.activity-heading-icon{
+
+    font-size:35px;
+    color:#175fc2;
+
+}
+
+.empty-state{
+
+    text-align:center;
+
+    padding:50px;
+
+}
+
+.empty-state i{
+
+    font-size:50px;
+    color:#c7d2e2;
+
+}
+
+.quick-action{
+
+    text-decoration:none;
+
+    color:black;
+
+    border:1px solid var(--stock-border);
+
+    border-radius:10px;
+
+    padding:15px;
+
+    display:flex;
+
+    gap:15px;
+
+    align-items:center;
+
+}
+
+.quick-action:hover{
+
+    background:#f6f8fb;
+
+}
+
+/* FOOTER */
+
+.stock-footer{
+
+    margin-top:80px;
+
+    background:#071f43;
+
+    color:white;
+
+    padding:25px;
+
+}
+
+/* INFORMATIONAL PAGE BANNER */
+
+.page-banner {
+    color: white;
+    background: linear-gradient(
+        135deg,
+        #071f43,
+        #10366c
+    );
+}
+
+.page-banner p {
+    color: rgba(255, 255, 255, 0.8);
+    max-width: 760px;
+}
+
+.section-label-light {
+    color: #bdd3ff;
+}
+
+
+/* ABOUT PAGE */
+
+.about-visual {
+    min-height: 340px;
+    border: 1px solid var(--stock-border);
+    border-radius: 20px;
+    background: linear-gradient(
+        135deg,
+        #e6eefb,
+        #f9fbff
+    );
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.about-visual i {
+    color: var(--stock-navy);
+    font-size: 8rem;
+}
+
+.feature-card,
+.service-card,
+.login-card {
+    background: white;
+    border: 1px solid var(--stock-border);
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+}
+
+.feature-card {
+    height: 100%;
+    padding: 28px;
+}
+
+.feature-card > i {
+    color: var(--stock-blue);
+    font-size: 2.25rem;
+}
+
+.feature-card h4 {
+    color: var(--stock-navy);
+    margin-top: 16px;
+    margin-bottom: 12px;
+}
+
+.feature-card p {
+    color: var(--stock-muted);
+    margin-bottom: 0;
+}
+
+
+/* SERVICES PAGE */
+
+.services-intro {
+    max-width: 680px;
+}
+
+.service-card {
+    height: 100%;
+    padding: 28px;
+}
+
+.service-icon {
+    width: 58px;
+    height: 58px;
+    border-radius: 14px;
+    color: var(--stock-blue);
+    background: #e7f0ff;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-size: 1.55rem;
+}
+
+.service-card h4 {
+    color: var(--stock-navy);
+    margin-top: 16px;
+    margin-bottom: 12px;
+}
+
+.service-card p {
+    color: var(--stock-muted);
+    margin-bottom: 0;
+}
+
+
+/* LOGIN PAGE */
+
+.login-body {
+    min-height: 100vh;
+
+    background:
+        radial-gradient(
+            circle at top right,
+            #dce8fb,
+            transparent 35%
+        ),
+        var(--stock-light);
+}
+
+.login-main {
+    min-height: calc(100vh - 72px);
+    padding: 64px 0;
+
+    display: flex;
+    align-items: center;
+}
+
+.login-card {
+    padding: 32px;
+}
+
+.login-logo {
+    width: 72px;
+    height: 72px;
+    margin: 0 auto;
+    border-radius: 50%;
+
+    color: white;
+    background: var(--stock-navy);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-size: 2rem;
+}
+
+.form-label {
+    color: var(--stock-text);
+    font-weight: 600;
+}
+
+.form-control,
+.form-select,
+.input-group-text {
+    min-height: 46px;
+    border-color: #ccd5e1;
+}
+
+.form-control:focus,
+.form-select:focus {
+    border-color: var(--stock-blue);
+    box-shadow: 0 0 0 0.2rem rgba(23, 95, 194, 0.15);
+}
+
+.stock-link {
+    color: var(--stock-blue);
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.stock-link:hover {
+    text-decoration: underline;
+}
+
+
+/* RESPONSIVE DESIGN */
+
+@media (max-width: 991.98px) {
+    .hero-illustration {
+        width: 170px;
+        height: 170px;
+    }
+
+    .hero-illustration i {
+        font-size: 70px;
+    }
+
+    .stock-navbar .btn {
+        margin-top: 8px;
+        margin-left: 0 !important;
+        margin-bottom: 8px;
+    }
+}
+
+@media (max-width: 575.98px) {
+    .stat-card {
+        align-items: flex-start;
+    }
+
+    .content-card,
+    .feature-card,
+    .service-card,
+    .login-card {
+        padding: 20px;
+    }
+
+    .dashboard-hero .display-5,
+    .page-banner .display-5 {
+        font-size: 2.2rem;
+    }
+
+    .empty-state {
+        padding: 35px 10px;
+    }
+}

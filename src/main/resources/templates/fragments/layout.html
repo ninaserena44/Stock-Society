@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en"
+xmlns:th="http://www.thymeleaf.org">
+
+<body>
+
+<header th:fragment="topbar">
+
+<nav class="navbar navbar-expand-lg navbar-dark stock-navbar">
+
+<div class="container">
+
+<a class="navbar-brand fw-bold"
+th:href="@{/}">
+
+<i class="bi bi-box-seam"></i>
+STOCK SOCIETY
+
+</a>
+
+<button
+class="navbar-toggler"
+type="button"
+data-bs-toggle="collapse"
+data-bs-target="#navbar">
+
+<span class="navbar-toggler-icon"></span>
+
+</button>
+
+<div class="collapse navbar-collapse"
+id="navbar">
+
+<ul class="navbar-nav ms-auto">
+
+<li class="nav-item">
+<a class="nav-link"
+th:href="@{/}">
+Home
+</a>
+</li>
+
+<li class="nav-item">
+<a class="nav-link"
+th:href="@{/items}">
+Items
+</a>
+</li>
+
+<li class="nav-item">
+<a class="nav-link"
+th:href="@{/services}">
+Services
+</a>
+</li>
+
+<li class="nav-item">
+<a class="nav-link"
+th:href="@{/about}">
+About
+</a>
+</li>
+
+<li class="nav-item">
+<a class="btn btn-outline-light ms-3"
+th:href="@{/login}">
+Login
+</a>
+</li>
+
+</ul>
+
+</div>
+
+</div>
+
+</nav>
+
+</header>
+
+<footer
+th:fragment="footer"
+class="stock-footer">
+
+<div class="container">
+
+<p class="mb-0">
+
+© 2026 Stock Society
+
+</p>
+
+</div>
+
+</footer>
+
+<div th:fragment="scripts">
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+</div>
+
+</body>
+
+</html>
