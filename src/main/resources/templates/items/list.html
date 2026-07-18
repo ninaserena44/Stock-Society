@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1">
+
+    <title>Stock Society | Inventory</title>
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet">
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
+        rel="stylesheet">
+
+    <link
+        th:href="@{/css/styles.css}"
+        rel="stylesheet">
+</head>
+
+<body class="d-flex flex-column min-vh-100">
+
+<header th:replace="~{fragments/layout :: topbar}"></header>
+
+<main class="flex-grow-1">
+
+    <section class="page-banner">
+        <div class="container py-5">
+
+            <span class="section-label section-label-light">
+                Warehouse Inventory
+            </span>
+
+            <h1 class="display-5 fw-bold mt-3">
+                Inventory Items
+            </h1>
+
+            <p class="lead mb-0">
+                View the products currently saved in Stock Society.
+            </p>
+
+        </div>
+    </section>
+
+
+    <section class="container py-5">
+
+        <div
+            th:if="${successMessage}"
+            class="alert alert-success alert-dismissible fade show"
+            role="alert">
+
+            <i class="bi bi-check-circle me-2"></i>
+
+            <span th:text="${successMessage}">
+                Item added successfully.
+            </span>
+
+            <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="alert"
+                aria-label="Close">
+            </button>
+
+        </div>
+
+
+        <div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mb-4">
+
+            <div>
+                <span class="section-label">
+                    Product Records
+                </span>
+
+                <h2 class="mt-2 mb-0">
+                    Current Inventory
+                </h2>
+            </div>
+
+            <a
+                th:href="@{/items/new}"
+                class="btn btn-stock">
+
+                <i class="bi bi-plus-circle me-2"></i>
+                Add New Item
+            </a>
+
+        </div>
+
+
+        <div class="content-card">
+
+            <div
+                th:if="${#lists.isEmpty(items)}"
+                class="empty-state">
+
+                <i class="bi bi-box"></i>
+
+                <h5>No items found</h5>
+
+                <p>
+                    Add your first product to begin building the inventory.
+                </p>
+
+                <a
+                    th:href="@{/items/new}"
+                    class="btn btn-stock">
+
+                    Add Item
+                </a>
+
+            </div>
+
+
+            <div
+                th:unless="${#lists.isEmpty(items)}"
+                class="table-responsive">
+
+                <table class="table align-middle mb-0">
+
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Item</th>
+                        <th>Brand</th>
+                        <th>Category</th>
+                        <th>Size</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+
+                    <tr th:each="item : ${items}">
+
+                        <td th:text="${item.itemId}">
+                            1
+                        </td>
+
+                        <td>
+                            <strong th:text="${item.itemName}">
+                                Example Item
+                            </strong>
+
+                            <div
+                                class="small text-secondary"
+                                th:text="${item.color}">
+
+                                Black
+                            </div>
+                        </td>
+
+                        <td th:text="${item.brand.displayName}">
+                            Nike
+                        </td>
+
+                        <td th:text="${item.category.displayName}">
+                            Footwear
+                        </td>
+
+                        <td th:text="${item.size.displayName}">
+                            M
+                        </td>
+
+                        <td
+                            th:text="${'$' + #numbers.formatDecimal(item.price, 1, 2)}">
+
+                            $99.99
+                        </td>
+
+                        <td th:text="${item.quantityAvailable}">
+                            20
+                        </td>
+
+                    </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </section>
+
+</main>
+
+<footer th:replace="~{fragments/layout :: footer}"></footer>
+
+<div th:replace="~{fragments/layout :: scripts}"></div>
+
+</body>
+</html>

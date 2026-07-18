@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1">
+
+    <title>Stock Society | Add Item</title>
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet">
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
+        rel="stylesheet">
+
+    <link
+        th:href="@{/css/styles.css}"
+        rel="stylesheet">
+</head>
+
+<body class="d-flex flex-column min-vh-100">
+
+<header th:replace="~{fragments/layout :: topbar}"></header>
+
+<main class="flex-grow-1">
+
+    <section class="page-banner">
+        <div class="container py-5">
+
+            <span class="section-label section-label-light">
+                Inventory Management
+            </span>
+
+            <h1 class="display-5 fw-bold mt-3">
+                Add New Item
+            </h1>
+
+            <p class="lead mb-0">
+                Enter the product information below to create a warehouse
+                inventory record.
+            </p>
+
+        </div>
+    </section>
+
+
+    <section class="container py-5">
+
+        <div class="row justify-content-center">
+
+            <div class="col-xl-10">
+
+                <form
+                    th:action="@{/items}"
+                    th:object="${item}"
+                    method="post"
+                    class="item-form-card">
+
+                    <div class="form-section-heading">
+
+                        <div>
+                            <span class="section-label">
+                                Product Details
+                            </span>
+
+                            <h2 class="mt-2 mb-1">
+                                Item Information
+                            </h2>
+
+                            <p class="text-secondary mb-0">
+                                Fields marked with an asterisk are required.
+                            </p>
+                        </div>
+
+                        <div class="form-heading-icon">
+                            <i class="bi bi-bag-plus"></i>
+                        </div>
+
+                    </div>
+
+
+                    <div
+                        th:if="${#fields.hasAnyErrors()}"
+                        class="alert alert-danger mt-4"
+                        role="alert">
+
+                        <strong>
+                            Please correct the highlighted fields.
+                        </strong>
+
+                    </div>
+
+
+                    <div class="row g-4 mt-1">
+
+                        <div class="col-md-8">
+
+                            <label
+                                for="itemName"
+                                class="form-label">
+
+                                Item Name *
+                            </label>
+
+                            <input
+                                type="text"
+                                id="itemName"
+                                th:field="*{itemName}"
+                                class="form-control"
+                                th:classappend="${#fields.hasErrors('itemName')} ? 'is-invalid'"
+                                placeholder="Example: Air Max 90">
+
+                            <div
+                                class="invalid-feedback"
+                                th:errors="*{itemName}">
+
+                                Item name error
+                            </div>
+
+                        </div>
+
+
+                        <div class="col-md-4">
+
+                            <label
+                                for="brand"
+                                class="form-label">
+
+                                Brand *
+                            </label>
+
+                            <select
+                                id="brand"
+                                th:field="*{brand}"
+                                class="form-select"
+                                th:classappend="${#fields.hasErrors('brand')} ? 'is-invalid'">
+
+                                <option value="">
+                                    Select a brand
+                                </option>
+
+                                <option
+                                    th:each="brandOption : ${brands}"
+                                    th:value="${brandOption}"
+                                    th:text="${brandOption.displayName}">
+                                </option>
+
+                            </select>
+
+                            <div
+                                class="invalid-feedback"
+                                th:errors="*{brand}">
+
+                                Brand error
+                            </div>
+
+                        </div>
+
+
+                        <div class="col-12">
+
+                            <label
+                                for="description"
+                                class="form-label">
+
+                                Description *
+                            </label>
+
+                            <textarea
+                                id="description"
+                                th:field="*{description}"
+                                class="form-control"
+                                th:classappend="${#fields.hasErrors('description')} ? 'is-invalid'"
+                                rows="4"
+                                placeholder="Describe the item and its main features.">
+                            </textarea>
+
+                            <div class="form-text">
+                                Use between 10 and 500 characters.
+                            </div>
+
+                            <div
+                                class="invalid-feedback"
+                                th:errors="*{description}">
+
+                                Description error
+                            </div>
+
+                        </div>
+
+
+                        <div class="col-md-4">
+
+                            <label
+                                for="category"
+                                class="form-label">
+
+                                Category *
+                            </label>
+
+                            <select
+                                id="category"
+                                th:field="*{category}"
+                                class="form-select"
+                                th:classappend="${#fields.hasErrors('category')} ? 'is-invalid'">
+
+                                <option value="">
+                                    Select a category
+                                </option>
+
+                                <option
+                                    th:each="categoryOption : ${categories}"
+                                    th:value="${categoryOption}"
+                                    th:text="${categoryOption.displayName}">
+                                </option>
+
+                            </select>
+
+                            <div
+                                class="invalid-feedback"
+                                th:errors="*{category}">
+
+                                Category error
+                            </div>
+
+                        </div>
+
+
+                        <div class="col-md-4">
+
+                            <label
+                                for="size"
+                                class="form-label">
+
+                                Size *
+                            </label>
+
+                            <select
+                                id="size"
+                                th:field="*{size}"
+                                class="form-select"
+                                th:classappend="${#fields.hasErrors('size')} ? 'is-invalid'">
+
+                                <option value="">
+                                    Select a size
+                                </option>
+
+                                <option
+                                    th:each="sizeOption : ${sizes}"
+                                    th:value="${sizeOption}"
+                                    th:text="${sizeOption.displayName}">
+                                </option>
+
+                            </select>
+
+                            <div
+                                class="invalid-feedback"
+                                th:errors="*{size}">
+
+                                Size error
+                            </div>
+
+                        </div>
+
+
+                        <div class="col-md-4">
+
+                            <label
+                                for="color"
+                                class="form-label">
+
+                                Colour *
+                            </label>
+
+                            <input
+                                type="text"
+                                id="color"
+                                th:field="*{color}"
+                                class="form-control"
+                                th:classappend="${#fields.hasErrors('color')} ? 'is-invalid'"
+                                placeholder="Example: Black">
+
+                            <div
+                                class="invalid-feedback"
+                                th:errors="*{color}">
+
+                                Colour error
+                            </div>
+
+                        </div>
+
+
+                        <div class="col-md-6">
+
+                            <label
+                                for="supplier"
+                                class="form-label">
+
+                                Supplier *
+                            </label>
+
+                            <select
+                                id="supplier"
+                                th:field="*{supplier}"
+                                class="form-select"
+                                th:classappend="${#fields.hasErrors('supplier')} ? 'is-invalid'">
+
+                                <option value="">
+                                    Select a supplier
+                                </option>
+
+                                <option
+                                    th:each="supplierOption : ${suppliers}"
+                                    th:value="${supplierOption}"
+                                    th:text="${supplierOption.displayName}">
+                                </option>
+
+                            </select>
+
+                            <div
+                                class="invalid-feedback"
+                                th:errors="*{supplier}">
+
+                                Supplier error
+                            </div>
+
+                        </div>
+
+
+                        <div class="col-md-6">
+
+                            <label
+                                for="price"
+                                class="form-label">
+
+                                Price *
+                            </label>
+
+                            <div class="input-group">
+
+                                <span class="input-group-text">
+                                    $
+                                </span>
+
+                                <input
+                                    type="number"
+                                    id="price"
+                                    th:field="*{price}"
+                                    class="form-control"
+                                    th:classappend="${#fields.hasErrors('price')} ? 'is-invalid'"
+                                    min="0.01"
+                                    max="10000"
+                                    step="0.01"
+                                    placeholder="0.00">
+
+                                <div
+                                    class="invalid-feedback"
+                                    th:errors="*{price}">
+
+                                    Price error
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="col-md-6">
+
+                            <label
+                                for="quantityAvailable"
+                                class="form-label">
+
+                                Quantity Available *
+                            </label>
+
+                            <input
+                                type="number"
+                                id="quantityAvailable"
+                                th:field="*{quantityAvailable}"
+                                class="form-control"
+                                th:classappend="${#fields.hasErrors('quantityAvailable')} ? 'is-invalid'"
+                                min="0"
+                                max="100000"
+                                placeholder="Example: 50">
+
+                            <div
+                                class="invalid-feedback"
+                                th:errors="*{quantityAvailable}">
+
+                                Quantity error
+                            </div>
+
+                        </div>
+
+
+                        <div class="col-md-6">
+
+                            <label
+                                for="reorderLevel"
+                                class="form-label">
+
+                                Reorder Level *
+                            </label>
+
+                            <input
+                                type="number"
+                                id="reorderLevel"
+                                th:field="*{reorderLevel}"
+                                class="form-control"
+                                th:classappend="${#fields.hasErrors('reorderLevel')} ? 'is-invalid'"
+                                min="0"
+                                max="10000"
+                                placeholder="Example: 10">
+
+                            <div
+                                class="form-text">
+                                Stock at or below this amount will be considered low.
+                            </div>
+
+                            <div
+                                class="invalid-feedback"
+                                th:errors="*{reorderLevel}">
+
+                                Reorder level error
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-actions">
+
+                        <a
+                            th:href="@{/items}"
+                            class="btn btn-outline-secondary">
+
+                            <i class="bi bi-arrow-left me-2"></i>
+                            Cancel
+                        </a>
+
+                        <button
+                            type="submit"
+                            class="btn btn-stock">
+
+                            <i class="bi bi-check-circle me-2"></i>
+                            Save Item
+                        </button>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </section>
+
+</main>
+
+<footer th:replace="~{fragments/layout :: footer}"></footer>
+
+<div th:replace="~{fragments/layout :: scripts}"></div>
+
+</body>
+</html>
