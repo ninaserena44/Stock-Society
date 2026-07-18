@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1">
+
+    <title th:text="'Stock Society | ' + ${item.itemName}">
+        Stock Society | Item Details
+    </title>
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet">
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
+        rel="stylesheet">
+
+    <link
+        th:href="@{/css/styles.css}"
+        rel="stylesheet">
+</head>
+
+<body class="d-flex flex-column min-vh-100">
+
+<header th:replace="~{fragments/layout :: topbar}"></header>
+
+<main class="flex-grow-1">
+
+    <section class="page-banner">
+        <div class="container py-5">
+
+            <span class="section-label section-label-light">
+                Item Details
+            </span>
+
+            <h1
+                class="display-5 fw-bold mt-3"
+                th:text="${item.itemName}">
+
+                Item Name
+            </h1>
+
+            <p class="lead mb-0">
+                Review the complete warehouse record for this product.
+            </p>
+
+        </div>
+    </section>
+
+
+    <section class="container py-5">
+
+        <div
+            th:if="${successMessage}"
+            class="alert alert-success alert-dismissible fade show"
+            role="alert">
+
+            <i class="bi bi-check-circle me-2"></i>
+
+            <span th:text="${successMessage}">
+                Item updated successfully.
+            </span>
+
+            <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="alert"
+                aria-label="Close">
+            </button>
+
+        </div>
+
+
+        <div class="row g-4">
+
+            <div class="col-lg-8">
+
+                <article class="item-details-card">
+
+                    <div class="item-details-heading">
+
+                        <div>
+                            <span
+                                class="detail-id"
+                                th:text="'Item #' + ${item.itemId}">
+
+                                Item #1
+                            </span>
+
+                            <h2
+                                class="mt-2 mb-2"
+                                th:text="${item.itemName}">
+
+                                Item Name
+                            </h2>
+
+                            <p
+                                class="text-secondary mb-0"
+                                th:text="${item.description}">
+
+                                Item description.
+                            </p>
+                        </div>
+
+                        <div class="details-icon">
+                            <i class="bi bi-bag"></i>
+                        </div>
+
+                    </div>
+
+
+                    <div class="details-grid">
+
+                        <div class="detail-entry">
+                            <span>Brand</span>
+
+                            <strong th:text="${item.brand.displayName}">
+                                Nike
+                            </strong>
+                        </div>
+
+                        <div class="detail-entry">
+                            <span>Category</span>
+
+                            <strong th:text="${item.category.displayName}">
+                                Footwear
+                            </strong>
+                        </div>
+
+                        <div class="detail-entry">
+                            <span>Size</span>
+
+                            <strong th:text="${item.size.displayName}">
+                                9
+                            </strong>
+                        </div>
+
+                        <div class="detail-entry">
+                            <span>Colour</span>
+
+                            <strong th:text="${item.color}">
+                                Black
+                            </strong>
+                        </div>
+
+                        <div class="detail-entry">
+                            <span>Supplier</span>
+
+                            <strong th:text="${item.supplier.displayName}">
+                                Direct from Brand
+                            </strong>
+                        </div>
+
+                        <div class="detail-entry">
+                            <span>Price</span>
+
+                            <strong
+                                th:text="${'$' + #numbers.formatDecimal(item.price, 1, 2)}">
+
+                                $99.99
+                            </strong>
+                        </div>
+
+                        <div class="detail-entry">
+                            <span>Quantity Available</span>
+
+                            <strong th:text="${item.quantityAvailable}">
+                                20
+                            </strong>
+                        </div>
+
+                        <div class="detail-entry">
+                            <span>Reorder Level</span>
+
+                            <strong th:text="${item.reorderLevel}">
+                                10
+                            </strong>
+                        </div>
+
+                        <div class="detail-entry">
+                            <span>Date Added</span>
+
+                            <strong
+                                th:text="${#temporals.format(
+                                    item.createdAt,
+                                    'MMM d, yyyy h:mm a'
+                                )}">
+
+                                Jul 17, 2026 8:00 PM
+                            </strong>
+                        </div>
+
+                    </div>
+
+                </article>
+
+            </div>
+
+
+            <div class="col-lg-4">
+
+                <article class="content-card mb-4">
+
+                    <span class="section-label">
+                        Stock Status
+                    </span>
+
+                    <div class="mt-3">
+
+                        <div
+                            th:if="${item.quantityAvailable == 0}"
+                            class="status-panel status-panel-out">
+
+                            <i class="bi bi-x-circle"></i>
+
+                            <div>
+                                <strong>Out of Stock</strong>
+
+                                <small>
+                                    This item has no available units.
+                                </small>
+                            </div>
+
+                        </div>
+
+
+                        <div
+                            th:if="${item.quantityAvailable > 0
+                                and item.quantityAvailable <= item.reorderLevel}"
+                            class="status-panel status-panel-low">
+
+                            <i class="bi bi-exclamation-triangle"></i>
+
+                            <div>
+                                <strong>Low Stock</strong>
+
+                                <small>
+                                    This item has reached its reorder level.
+                                </small>
+                            </div>
+
+                        </div>
+
+
+                        <div
+                            th:if="${item.quantityAvailable > item.reorderLevel}"
+                            class="status-panel status-panel-good">
+
+                            <i class="bi bi-check-circle"></i>
+
+                            <div>
+                                <strong>Stock Available</strong>
+
+                                <small>
+                                    Inventory is above the reorder level.
+                                </small>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+                <article class="content-card">
+
+                    <span class="section-label">
+                        Item Actions
+                    </span>
+
+                    <div class="d-grid gap-3 mt-3">
+
+                        <a
+                            th:href="@{/items/{id}/edit(id=${item.itemId})}"
+                            class="btn btn-stock">
+
+                            <i class="bi bi-pencil me-2"></i>
+                            Edit Item
+                        </a>
+
+                        <a
+                            th:href="@{/items}"
+                            class="btn btn-outline-secondary">
+
+                            <i class="bi bi-arrow-left me-2"></i>
+                            Back to Inventory
+                        </a>
+
+                        <form
+                            th:action="@{/items/{id}/delete(id=${item.itemId})}"
+                            method="post"
+                            onsubmit="return confirm('Are you sure you want to delete this item?');">
+
+                            <button
+                                type="submit"
+                                class="btn btn-outline-danger w-100">
+
+                                <i class="bi bi-trash me-2"></i>
+                                Delete Item
+                            </button>
+
+                        </form>
+
+                    </div>
+
+                </article>
+
+            </div>
+
+        </div>
+
+    </section>
+
+</main>
+
+<footer th:replace="~{fragments/layout :: footer}"></footer>
+
+<div th:replace="~{fragments/layout :: scripts}"></div>
+
+</body>
+</html>

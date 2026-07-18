@@ -542,3 +542,177 @@ body{
         width: 100%;
     }
 }
+
+/* INVENTORY ACTIONS AND STATUS */
+
+.item-name-link {
+    color: var(--stock-navy);
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.item-name-link:hover {
+    color: var(--stock-blue);
+    text-decoration: underline;
+}
+
+.item-actions {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 6px;
+    white-space: nowrap;
+}
+
+.stock-badge {
+    display: inline-flex;
+    align-items: center;
+    border-radius: 999px;
+    padding: 6px 10px;
+    font-size: 0.78rem;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.stock-good {
+    color: #19692c;
+    background: #e9f8ed;
+}
+
+.stock-low {
+    color: #8a5a00;
+    background: #fff3cd;
+}
+
+.stock-out {
+    color: #a2202f;
+    background: #fbe9ec;
+}
+
+
+/* ITEM DETAILS */
+
+.item-details-card {
+    background: white;
+    border: 1px solid var(--stock-border);
+    border-radius: 18px;
+    padding: 32px;
+    box-shadow: 0 12px 30px rgba(7, 31, 67, 0.08);
+}
+
+.item-details-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 24px;
+    padding-bottom: 28px;
+    border-bottom: 1px solid var(--stock-border);
+}
+
+.detail-id {
+    color: var(--stock-blue);
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}
+
+.details-icon {
+    width: 72px;
+    height: 72px;
+    flex-shrink: 0;
+    border-radius: 18px;
+    color: var(--stock-blue);
+    background: #e7f0ff;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-size: 2rem;
+}
+
+.details-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+    margin-top: 28px;
+}
+
+.detail-entry {
+    border: 1px solid var(--stock-border);
+    border-radius: 12px;
+    padding: 18px;
+    background: #fafcff;
+}
+
+.detail-entry span {
+    display: block;
+    color: var(--stock-muted);
+    font-size: 0.82rem;
+    font-weight: 600;
+    margin-bottom: 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.detail-entry strong {
+    color: var(--stock-navy);
+}
+
+.status-panel {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    border-radius: 12px;
+    padding: 18px;
+}
+
+.status-panel i {
+    font-size: 1.6rem;
+}
+
+.status-panel strong,
+.status-panel small {
+    display: block;
+}
+
+.status-panel small {
+    margin-top: 3px;
+}
+
+.status-panel-good {
+    color: #19692c;
+    background: #e9f8ed;
+}
+
+.status-panel-low {
+    color: #8a5a00;
+    background: #fff3cd;
+}
+
+.status-panel-out {
+    color: #a2202f;
+    background: #fbe9ec;
+}
+
+@media (max-width: 767.98px) {
+    .details-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .item-details-card {
+        padding: 20px;
+    }
+
+    .item-details-heading {
+        align-items: flex-start;
+    }
+
+    .details-icon {
+        width: 56px;
+        height: 56px;
+        border-radius: 14px;
+        font-size: 1.5rem;
+    }
+}

@@ -14,7 +14,7 @@ INSERT INTO items (
 VALUES (
     'Air Max 90',
     'Classic lifestyle footwear with comfortable cushioned support.',
-    'M',
+    'SIZE_9',
     'White and Black',
     169.99,
     'FOOTWEAR',
@@ -122,7 +122,7 @@ INSERT INTO items (
 VALUES (
     'Chuck Taylor All Star',
     'Canvas lifestyle sneaker with a timeless high-top design.',
-    'M',
+    'SIZE_6_5',
     'Black',
     84.99,
     'FOOTWEAR',

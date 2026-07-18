@@ -1,3 +1,4 @@
+<!-- This is for both add and edit item-->
 <!DOCTYPE html>
 <html lang="en"
       xmlns:th="http://www.thymeleaf.org">
@@ -8,7 +9,9 @@
     <meta name="viewport"
           content="width=device-width, initial-scale=1">
 
-    <title>Stock Society | Add Item</title>
+    <title th:text="'Stock Society | ' + ${pageTitle}">
+        Stock Society | Item Form
+    </title>
 
     <link
         href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
@@ -36,12 +39,15 @@
                 Inventory Management
             </span>
 
-            <h1 class="display-5 fw-bold mt-3">
-                Add New Item
+            <h1
+                class="display-5 fw-bold mt-3"
+                th:text="${pageTitle}">
+
+                Item Form
             </h1>
 
             <p class="lead mb-0">
-                Enter the product information below to create a warehouse
+                Enter the product information below and save the warehouse
                 inventory record.
             </p>
 
@@ -56,10 +62,17 @@
             <div class="col-xl-10">
 
                 <form
-                    th:action="@{/items}"
                     th:object="${item}"
+                    th:action="${item.itemId == null}
+                        ? @{/items}
+                        : @{/items/{id}(id=${item.itemId})}"
                     method="post"
                     class="item-form-card">
+
+                    <input
+                        type="hidden"
+                        th:field="*{itemId}">
+
 
                     <div class="form-section-heading">
 
@@ -68,7 +81,10 @@
                                 Product Details
                             </span>
 
-                            <h2 class="mt-2 mb-1">
+                            <h2
+                                class="mt-2 mb-1"
+                                th:text="${formHeading}">
+
                                 Item Information
                             </h2>
 
@@ -78,7 +94,12 @@
                         </div>
 
                         <div class="form-heading-icon">
-                            <i class="bi bi-bag-plus"></i>
+                            <i
+                                class="bi"
+                                th:classappend="${item.itemId == null}
+                                    ? ' bi-bag-plus'
+                                    : ' bi-pencil-square'">
+                            </i>
                         </div>
 
                     </div>
@@ -112,7 +133,8 @@
                                 id="itemName"
                                 th:field="*{itemName}"
                                 class="form-control"
-                                th:classappend="${#fields.hasErrors('itemName')} ? 'is-invalid'"
+                                th:classappend="${#fields.hasErrors('itemName')}
+                                    ? 'is-invalid'"
                                 placeholder="Example: Air Max 90">
 
                             <div
@@ -138,7 +160,8 @@
                                 id="brand"
                                 th:field="*{brand}"
                                 class="form-select"
-                                th:classappend="${#fields.hasErrors('brand')} ? 'is-invalid'">
+                                th:classappend="${#fields.hasErrors('brand')}
+                                    ? 'is-invalid'">
 
                                 <option value="">
                                     Select a brand
@@ -175,7 +198,8 @@
                                 id="description"
                                 th:field="*{description}"
                                 class="form-control"
-                                th:classappend="${#fields.hasErrors('description')} ? 'is-invalid'"
+                                th:classappend="${#fields.hasErrors('description')}
+                                    ? 'is-invalid'"
                                 rows="4"
                                 placeholder="Describe the item and its main features.">
                             </textarea>
@@ -207,7 +231,8 @@
                                 id="category"
                                 th:field="*{category}"
                                 class="form-select"
-                                th:classappend="${#fields.hasErrors('category')} ? 'is-invalid'">
+                                th:classappend="${#fields.hasErrors('category')}
+                                    ? 'is-invalid'">
 
                                 <option value="">
                                     Select a category
@@ -244,7 +269,8 @@
                                 id="size"
                                 th:field="*{size}"
                                 class="form-select"
-                                th:classappend="${#fields.hasErrors('size')} ? 'is-invalid'">
+                                th:classappend="${#fields.hasErrors('size')}
+                                    ? 'is-invalid'">
 
                                 <option value="">
                                     Select a size
@@ -282,7 +308,8 @@
                                 id="color"
                                 th:field="*{color}"
                                 class="form-control"
-                                th:classappend="${#fields.hasErrors('color')} ? 'is-invalid'"
+                                th:classappend="${#fields.hasErrors('color')}
+                                    ? 'is-invalid'"
                                 placeholder="Example: Black">
 
                             <div
@@ -308,7 +335,8 @@
                                 id="supplier"
                                 th:field="*{supplier}"
                                 class="form-select"
-                                th:classappend="${#fields.hasErrors('supplier')} ? 'is-invalid'">
+                                th:classappend="${#fields.hasErrors('supplier')}
+                                    ? 'is-invalid'">
 
                                 <option value="">
                                     Select a supplier
@@ -352,7 +380,8 @@
                                     id="price"
                                     th:field="*{price}"
                                     class="form-control"
-                                    th:classappend="${#fields.hasErrors('price')} ? 'is-invalid'"
+                                    th:classappend="${#fields.hasErrors('price')}
+                                        ? 'is-invalid'"
                                     min="0.01"
                                     max="10000"
                                     step="0.01"
@@ -384,7 +413,8 @@
                                 id="quantityAvailable"
                                 th:field="*{quantityAvailable}"
                                 class="form-control"
-                                th:classappend="${#fields.hasErrors('quantityAvailable')} ? 'is-invalid'"
+                                th:classappend="${#fields.hasErrors('quantityAvailable')}
+                                    ? 'is-invalid'"
                                 min="0"
                                 max="100000"
                                 placeholder="Example: 50">
@@ -413,14 +443,14 @@
                                 id="reorderLevel"
                                 th:field="*{reorderLevel}"
                                 class="form-control"
-                                th:classappend="${#fields.hasErrors('reorderLevel')} ? 'is-invalid'"
+                                th:classappend="${#fields.hasErrors('reorderLevel')}
+                                    ? 'is-invalid'"
                                 min="0"
                                 max="10000"
                                 placeholder="Example: 10">
 
-                            <div
-                                class="form-text">
-                                Stock at or below this amount will be considered low.
+                            <div class="form-text">
+                                Stock at or below this amount is considered low.
                             </div>
 
                             <div
@@ -438,7 +468,9 @@
                     <div class="form-actions">
 
                         <a
-                            th:href="@{/items}"
+                            th:href="${item.itemId == null}
+                                ? @{/items}
+                                : @{/items/{id}(id=${item.itemId})}"
                             class="btn btn-outline-secondary">
 
                             <i class="bi bi-arrow-left me-2"></i>
@@ -450,7 +482,10 @@
                             class="btn btn-stock">
 
                             <i class="bi bi-check-circle me-2"></i>
-                            Save Item
+
+                            <span th:text="${submitLabel}">
+                                Save Item
+                            </span>
                         </button>
 
                     </div>
