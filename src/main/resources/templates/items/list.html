@@ -41,7 +41,8 @@
             </h1>
 
             <p class="lead mb-0">
-                View and manage the products currently saved in Stock Society.
+                Search, filter, sort, and manage products saved in
+                Stock Society.
             </p>
 
         </div>
@@ -71,25 +72,374 @@
         </div>
 
 
-        <div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mb-4">
+        <div class="inventory-toolbar mb-4">
+
+            <div class="inventory-toolbar-heading">
+
+                <div>
+                    <span class="section-label">
+                        Search Inventory
+                    </span>
+
+                    <h2 class="mt-2 mb-1">
+                        Find Product Records
+                    </h2>
+
+                    <p class="text-secondary mb-0">
+                        Search by name, description, or colour.
+                    </p>
+                </div>
+
+                <a
+                    th:href="@{/items/new}"
+                    class="btn btn-stock">
+
+                    <i class="bi bi-plus-circle me-2"></i>
+                    Add New Item
+                </a>
+
+            </div>
+
+
+            <form
+                th:action="@{/items}"
+                method="get"
+                class="inventory-filter-form">
+
+                <div class="row g-3">
+
+                    <div class="col-lg-6">
+
+                        <label
+                            for="keyword"
+                            class="form-label">
+
+                            Keyword
+                        </label>
+
+                        <div class="input-group">
+
+                            <span class="input-group-text">
+                                <i class="bi bi-search"></i>
+                            </span>
+
+                            <input
+                                type="text"
+                                id="keyword"
+                                name="keyword"
+                                class="form-control"
+                                th:value="${keyword}"
+                                placeholder="Search item name, description, or colour">
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="col-md-6 col-lg-3">
+
+                        <label
+                            for="brand"
+                            class="form-label">
+
+                            Brand
+                        </label>
+
+                        <select
+                            id="brand"
+                            name="brand"
+                            class="form-select">
+
+                            <option value="">
+                                All Brands
+                            </option>
+
+                            <option
+                                th:each="brandOption : ${brands}"
+                                th:value="${brandOption}"
+                                th:text="${brandOption.displayName}"
+                                th:selected="${brandOption == selectedBrand}">
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="col-md-6 col-lg-3">
+
+                        <label
+                            for="category"
+                            class="form-label">
+
+                            Category
+                        </label>
+
+                        <select
+                            id="category"
+                            name="category"
+                            class="form-select">
+
+                            <option value="">
+                                All Categories
+                            </option>
+
+                            <option
+                                th:each="categoryOption : ${categories}"
+                                th:value="${categoryOption}"
+                                th:text="${categoryOption.displayName}"
+                                th:selected="${categoryOption == selectedCategory}">
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="col-md-6 col-lg-3">
+
+                        <label
+                            for="supplier"
+                            class="form-label">
+
+                            Supplier
+                        </label>
+
+                        <select
+                            id="supplier"
+                            name="supplier"
+                            class="form-select">
+
+                            <option value="">
+                                All Suppliers
+                            </option>
+
+                            <option
+                                th:each="supplierOption : ${suppliers}"
+                                th:value="${supplierOption}"
+                                th:text="${supplierOption.displayName}"
+                                th:selected="${supplierOption == selectedSupplier}">
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="col-md-6 col-lg-3">
+
+                        <label
+                            for="stockStatus"
+                            class="form-label">
+
+                            Stock Status
+                        </label>
+
+                        <select
+                            id="stockStatus"
+                            name="stockStatus"
+                            class="form-select">
+
+                            <option value="">
+                                All Stock Levels
+                            </option>
+
+                            <option
+                                value="AVAILABLE"
+                                th:selected="${stockStatus == 'AVAILABLE'}">
+
+                                Available
+                            </option>
+
+                            <option
+                                value="LOW"
+                                th:selected="${stockStatus == 'LOW'}">
+
+                                Low Stock
+                            </option>
+
+                            <option
+                                value="OUT"
+                                th:selected="${stockStatus == 'OUT'}">
+
+                                Out of Stock
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="col-md-6 col-lg-3">
+
+                        <label
+                            for="sortBy"
+                            class="form-label">
+
+                            Sort By
+                        </label>
+
+                        <select
+                            id="sortBy"
+                            name="sortBy"
+                            class="form-select">
+
+                            <option
+                                value="itemName"
+                                th:selected="${sortBy == 'itemName'}">
+
+                                Item Name
+                            </option>
+
+                            <option
+                                value="price"
+                                th:selected="${sortBy == 'price'}">
+
+                                Price
+                            </option>
+
+                            <option
+                                value="quantityAvailable"
+                                th:selected="${sortBy == 'quantityAvailable'}">
+
+                                Quantity
+                            </option>
+
+                            <option
+                                value="createdAt"
+                                th:selected="${sortBy == 'createdAt'}">
+
+                                Date Added
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="col-md-6 col-lg-3">
+
+                        <label
+                            for="direction"
+                            class="form-label">
+
+                            Direction
+                        </label>
+
+                        <select
+                            id="direction"
+                            name="direction"
+                            class="form-select">
+
+                            <option
+                                value="asc"
+                                th:selected="${direction == 'asc'}">
+
+                                Ascending
+                            </option>
+
+                            <option
+                                value="desc"
+                                th:selected="${direction == 'desc'}">
+
+                                Descending
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="col-md-6 col-lg-3">
+
+                        <label
+                            for="size"
+                            class="form-label">
+
+                            Items Per Page
+                        </label>
+
+                        <select
+                            id="size"
+                            name="size"
+                            class="form-select">
+
+                            <option
+                                value="5"
+                                th:selected="${pageSize == 5}">
+
+                                5
+                            </option>
+
+                            <option
+                                value="10"
+                                th:selected="${pageSize == 10}">
+
+                                10
+                            </option>
+
+                            <option
+                                value="20"
+                                th:selected="${pageSize == 20}">
+
+                                20
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+
+                <div class="filter-actions">
+
+                    <a
+                        th:href="@{/items}"
+                        class="btn btn-outline-secondary">
+
+                        <i class="bi bi-x-circle me-2"></i>
+                        Clear Filters
+                    </a>
+
+                    <button
+                        type="submit"
+                        class="btn btn-stock">
+
+                        <i class="bi bi-funnel me-2"></i>
+                        Apply
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+
+        <div class="inventory-results-heading">
 
             <div>
                 <span class="section-label">
                     Product Records
                 </span>
 
-                <h2 class="mt-2 mb-0">
-                    Current Inventory
-                </h2>
+                <h3 class="mt-2 mb-0">
+                    Search Results
+                </h3>
             </div>
 
-            <a
-                th:href="@{/items/new}"
-                class="btn btn-stock">
+            <div class="result-count">
 
-                <i class="bi bi-plus-circle me-2"></i>
-                Add New Item
-            </a>
+                <strong th:text="${totalResults}">
+                    0
+                </strong>
+
+                <span th:text="${totalResults == 1 ? 'result' : 'results'}">
+                    results
+                </span>
+
+            </div>
 
         </div>
 
@@ -97,29 +447,29 @@
         <div class="content-card">
 
             <div
-                th:if="${#lists.isEmpty(items)}"
+                th:if="${#lists.isEmpty(items.content)}"
                 class="empty-state">
 
-                <i class="bi bi-box"></i>
+                <i class="bi bi-search"></i>
 
-                <h5>No items found</h5>
+                <h5>No matching items found</h5>
 
                 <p>
-                    Add your first product to begin building the inventory.
+                    Try changing your search terms or removing some filters.
                 </p>
 
                 <a
-                    th:href="@{/items/new}"
+                    th:href="@{/items}"
                     class="btn btn-stock">
 
-                    Add Item
+                    Clear Search
                 </a>
 
             </div>
 
 
             <div
-                th:unless="${#lists.isEmpty(items)}"
+                th:unless="${#lists.isEmpty(items.content)}"
                 class="table-responsive">
 
                 <table class="table align-middle mb-0">
@@ -139,13 +489,14 @@
 
                     <tbody>
 
-                    <tr th:each="item : ${items}">
+                    <tr th:each="item : ${items.content}">
 
                         <td th:text="${item.itemId}">
                             1
                         </td>
 
                         <td>
+
                             <a
                                 th:href="@{/items/{id}(id=${item.itemId})}"
                                 class="item-name-link"
@@ -160,6 +511,7 @@
 
                                 Black
                             </div>
+
                         </td>
 
                         <td th:text="${item.brand.displayName}">
@@ -257,6 +609,111 @@
             </div>
 
         </div>
+
+
+        <nav
+            th:if="${items.totalPages > 1}"
+            class="inventory-pagination"
+            aria-label="Inventory pages">
+
+            <div class="pagination-summary">
+
+                Page
+
+                <strong th:text="${items.number + 1}">
+                    1
+                </strong>
+
+                of
+
+                <strong th:text="${items.totalPages}">
+                    1
+                </strong>
+
+            </div>
+
+
+            <ul class="pagination mb-0">
+
+                <li
+                    class="page-item"
+                    th:classappend="${items.first} ? 'disabled'">
+
+                    <a
+                        class="page-link"
+                        th:href="@{/items(
+                            page=${items.number - 1},
+                            size=${pageSize},
+                            keyword=${keyword},
+                            brand=${selectedBrand},
+                            category=${selectedCategory},
+                            supplier=${selectedSupplier},
+                            stockStatus=${stockStatus},
+                            sortBy=${sortBy},
+                            direction=${direction}
+                        )}">
+
+                        Previous
+                    </a>
+
+                </li>
+
+
+                <li
+                    th:each="pageNumber : ${#numbers.sequence(
+                        0,
+                        items.totalPages - 1
+                    )}"
+                    class="page-item"
+                    th:classappend="${pageNumber == items.number} ? 'active'">
+
+                    <a
+                        class="page-link"
+                        th:text="${pageNumber + 1}"
+                        th:href="@{/items(
+                            page=${pageNumber},
+                            size=${pageSize},
+                            keyword=${keyword},
+                            brand=${selectedBrand},
+                            category=${selectedCategory},
+                            supplier=${selectedSupplier},
+                            stockStatus=${stockStatus},
+                            sortBy=${sortBy},
+                            direction=${direction}
+                        )}">
+
+                        1
+                    </a>
+
+                </li>
+
+
+                <li
+                    class="page-item"
+                    th:classappend="${items.last} ? 'disabled'">
+
+                    <a
+                        class="page-link"
+                        th:href="@{/items(
+                            page=${items.number + 1},
+                            size=${pageSize},
+                            keyword=${keyword},
+                            brand=${selectedBrand},
+                            category=${selectedCategory},
+                            supplier=${selectedSupplier},
+                            stockStatus=${stockStatus},
+                            sortBy=${sortBy},
+                            direction=${direction}
+                        )}">
+
+                        Next
+                    </a>
+
+                </li>
+
+            </ul>
+
+        </nav>
 
     </section>
 

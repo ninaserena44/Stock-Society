@@ -1,3 +1,5 @@
+//author PB
+
 package com.stocksociety.stocksociety.controller;
 
 import com.stocksociety.stocksociety.model.Brand;
@@ -20,6 +22,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import java.util.Set;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping("/items")
@@ -52,8 +63,73 @@ public class ItemController {
     }
 
     @GetMapping
-    public String showItems(Model model) {
-        model.addAttribute("items", itemRepository.findAll());
+    public String showItems(
+        @RequestParam(required = false) String keyword,
+        @RequestParam(required = false) Brand brand,
+        @RequestParam(required = false) Category category,
+        @RequestParam(required = false) Supplier supplier,
+        @RequestParam(required = false) String stockStatus,
+        @RequestParam(defaultValue = "itemName") String sortBy,
+        @RequestParam(defaultValue = "asc") String direction,
+        @RequestParam(defaultValue = "0") int page,
+        @RequestParam(defaultValue = "5") int size,
+        Model model
+    ) {
+        String normalizedKeyword =
+            StringUtils.hasText(keyword) ? keyword.trim() : null;
+
+        String normalizedStockStatus =
+            StringUtils.hasText(stockStatus) ? stockStatus : null;
+
+        Set<String> allowedSortFields = Set.of(
+            "itemName",
+            "price",
+            "quantityAvailable",
+            "createdAt"
+        );
+
+        if (!allowedSortFields.contains(sortBy)) {
+            sortBy = "itemName";
+        }
+
+        if (page < 0) {
+            page = 0;
+        }
+
+        if (size != 5 && size != 10 && size != 20) {
+            size = 5;
+        }
+
+        Sort.Direction sortDirection =
+            direction.equalsIgnoreCase("desc")
+                ? Sort.Direction.DESC
+                : Sort.Direction.ASC;
+
+        Pageable pageable = PageRequest.of(
+            page,
+            size,
+            Sort.by(sortDirection, sortBy)
+        );
+
+        Page<Item> itemPage = itemRepository.searchItems(
+            normalizedKeyword,
+            brand,
+            category,
+            supplier,
+            normalizedStockStatus,
+            pageable
+        );
+
+        model.addAttribute("items", itemPage);
+        model.addAttribute("keyword", keyword);
+        model.addAttribute("selectedBrand", brand);
+        model.addAttribute("selectedCategory", category);
+        model.addAttribute("selectedSupplier", supplier);
+        model.addAttribute("stockStatus", stockStatus);
+        model.addAttribute("sortBy", sortBy);
+        model.addAttribute("direction", direction);
+        model.addAttribute("pageSize", size);
+        model.addAttribute("totalResults", itemPage.getTotalElements());
 
         return "items/list";
     }
