@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"
       xmlns:th="http://www.thymeleaf.org">
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
 
 <head>
     <meta charset="UTF-8">
@@ -92,7 +93,8 @@
 
                 <a
                     th:href="@{/items/new}"
-                    class="btn btn-stock">
+                    class="btn btn-stock"
+                    sec:authorize="hasAnyRole('STAFF', 'ADMIN')">
 
                     <i class="bi bi-plus-circle me-2"></i>
                     Add New Item
@@ -575,7 +577,8 @@
                                 <a
                                     th:href="@{/items/{id}/edit(id=${item.itemId})}"
                                     class="btn btn-sm btn-outline-secondary"
-                                    title="Edit item">
+                                    title="Edit item"
+                                    sec:authorize="hasAnyRole('STAFF', 'ADMIN')">
 
                                     <i class="bi bi-pencil"></i>
                                 </a>
@@ -583,8 +586,7 @@
                                 <form
                                     th:action="@{/items/{id}/delete(id=${item.itemId})}"
                                     method="post"
-                                    class="d-inline"
-                                    onsubmit="return confirm('Are you sure you want to delete this item?');">
+                                    sec:authorize="hasRole('ADMIN')">
 
                                     <button
                                         type="submit"
@@ -592,6 +594,7 @@
                                         title="Delete item">
 
                                         <i class="bi bi-trash"></i>
+
                                     </button>
 
                                 </form>
