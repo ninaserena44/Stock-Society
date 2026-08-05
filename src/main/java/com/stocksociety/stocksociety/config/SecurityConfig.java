@@ -36,8 +36,22 @@ public class SecurityConfig {
                 )
                 .formLogin(form -> form
                         .loginPage("/login")
+                        .usernameParameter("email")
+                        .passwordParameter("password")
+                        .defaultSuccessUrl("/", true)
+                        .failureUrl("/login?error")
                         .permitAll()
                 )
+
+                .logout(logout -> logout
+                        .logoutUrl("/logout")
+                        .logoutSuccessUrl("/login?logout")
+                        .invalidateHttpSession(true)
+                        .clearAuthentication(true)
+                        .deleteCookies("JSESSIONID")
+                        .permitAll()
+                )
+
                 .csrf(csrf -> csrf
                         .ignoringRequestMatchers("/h2-console/**")
                 )

@@ -410,6 +410,32 @@ body{
     text-decoration: underline;
 }
 
+/* LOGIN FEEDBACK */
+
+.login-card .alert {
+    border-radius: 10px;
+    font-size: 0.95rem;
+}
+
+.login-card .input-group-text {
+    color: var(--stock-navy);
+    background: #f3f6fa;
+}
+
+.login-card .form-control::placeholder {
+    color: #98a2b3;
+}
+
+.login-card .btn-stock {
+    min-height: 48px;
+    font-weight: 700;
+}
+
+.dropdown-item-text strong {
+    color: var(--stock-navy);
+    word-break: break-word;
+}
+
 /* REGISTRATION PAGE */
 
 .field-error {
