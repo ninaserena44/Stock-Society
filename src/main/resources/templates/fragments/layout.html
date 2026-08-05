@@ -22,7 +22,10 @@
                 class="navbar-toggler"
                 type="button"
                 data-bs-toggle="collapse"
-                data-bs-target="#navbar">
+                data-bs-target="#navbar"
+                aria-controls="navbar"
+                aria-expanded="false"
+                aria-label="Toggle navigation">
 
                 <span class="navbar-toggler-icon"></span>
 
@@ -34,45 +37,57 @@
                 <ul class="navbar-nav ms-auto align-items-lg-center">
 
                     <li class="nav-item">
+
                         <a class="nav-link"
                            th:href="@{/}">
                             Home
                         </a>
+
                     </li>
 
                     <li class="nav-item">
+
                         <a class="nav-link"
                            th:href="@{/items}">
                             Items
                         </a>
+
                     </li>
 
                     <li class="nav-item">
+
                         <a class="nav-link"
                            th:href="@{/services}">
                             Services
                         </a>
+
                     </li>
 
                     <li class="nav-item">
+
                         <a class="nav-link"
                            th:href="@{/about}">
                             About
                         </a>
+
                     </li>
 
                     <li class="nav-item">
+
                         <a class="btn btn-outline-light ms-lg-3"
                            th:href="@{/login}">
                             Login
                         </a>
+
                     </li>
 
                     <li class="nav-item">
+
                         <a class="btn btn-light ms-lg-2"
                            th:href="@{/register}">
                             Register
                         </a>
+
                     </li>
 
                 </ul>
@@ -85,19 +100,41 @@
 
 </header>
 
+
 <footer
     th:fragment="footer"
     class="stock-footer">
 
-    <div class="container">
+    <div class="container text-center">
 
-        <p class="mb-0">
+        <h6 class="fw-bold mb-2">
+            Stock Society Inventory Management System
+        </h6>
+
+        <p class="mb-1">
             © 2026 Stock Society
         </p>
+
+        <small class="text-muted">
+
+            Developed by
+
+            <strong>
+                Princess Krish Anne Bernardino and Serena Nina Omondi
+            </strong>
+
+            for
+
+            <strong>
+                CPAN 228 - Java Enterprise Applications
+            </strong>
+
+        </small>
 
     </div>
 
 </footer>
+
 
 <div th:fragment="scripts">
 

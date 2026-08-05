@@ -31,3 +31,10 @@ build/
 
 ### VS Code ###
 .vscode/
+
+### data.sql ###
+/data/
+
+data/*.mv.db
+data/*.trace.db
+target/

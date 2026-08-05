@@ -1,4 +1,4 @@
-INSERT INTO items (
+MERGE INTO items (
     item_name,
     description,
     size,
@@ -11,6 +11,7 @@ INSERT INTO items (
     reorder_level,
     created_at
 )
+KEY (item_name)
 VALUES (
     'Air Max 90',
     'Classic lifestyle footwear with comfortable cushioned support.',
@@ -25,7 +26,7 @@ VALUES (
     CURRENT_TIMESTAMP
 );
 
-INSERT INTO items (
+MERGE INTO items (
     item_name,
     description,
     size,
@@ -38,6 +39,7 @@ INSERT INTO items (
     reorder_level,
     created_at
 )
+KEY (item_name)
 VALUES (
     'Essential Pullover Hoodie',
     'Comfortable everyday pullover hoodie designed for casual wear.',
@@ -52,7 +54,7 @@ VALUES (
     CURRENT_TIMESTAMP
 );
 
-INSERT INTO items (
+MERGE INTO items (
     item_name,
     description,
     size,
@@ -65,6 +67,7 @@ INSERT INTO items (
     reorder_level,
     created_at
 )
+KEY (item_name)
 VALUES (
     'Nuptse Puffer Jacket',
     'Insulated outerwear designed for colder weather conditions.',
@@ -79,7 +82,7 @@ VALUES (
     CURRENT_TIMESTAMP
 );
 
-INSERT INTO items (
+MERGE INTO items (
     item_name,
     description,
     size,
@@ -92,6 +95,7 @@ INSERT INTO items (
     reorder_level,
     created_at
 )
+KEY (item_name)
 VALUES (
     'Classic Logo Cap',
     'Adjustable everyday cap with an embroidered brand logo.',
@@ -106,7 +110,7 @@ VALUES (
     CURRENT_TIMESTAMP
 );
 
-INSERT INTO items (
+MERGE INTO items (
     item_name,
     description,
     size,
@@ -119,6 +123,7 @@ INSERT INTO items (
     reorder_level,
     created_at
 )
+KEY (item_name)
 VALUES (
     'Chuck Taylor All Star',
     'Canvas lifestyle sneaker with a timeless high-top design.',
@@ -133,7 +138,7 @@ VALUES (
     CURRENT_TIMESTAMP
 );
 
-INSERT INTO items (
+MERGE INTO items (
     item_name,
     description,
     size,
@@ -146,6 +151,7 @@ INSERT INTO items (
     reorder_level,
     created_at
 )
+KEY (item_name)
 VALUES (
     'Tech Fleece Joggers',
     'Slim-fit fleece joggers suitable for casual and athletic wear.',
