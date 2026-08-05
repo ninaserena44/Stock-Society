@@ -52,6 +52,11 @@
 
                     </div>
 
+                    <div class="alert alert-success"
+                        th:if="${param.registered}">
+                        <i class="bi bi-check-circle me-2"></i>
+                        Your account was created successfully. You can now log in.
+                    </div>
 
                     <form th:action="@{/}"
                           method="get">
@@ -118,12 +123,14 @@
 
 
                         <div class="text-center mt-4">
+                            <span class="text-secondary">
+                                Don’t have an account?
+                            </span>
 
-                            <a href="#"
-                               class="stock-link">
-                                Forgot password?
+                            <a th:href="@{/register}"
+                            class="stock-link ms-1">
+                                Create an account
                             </a>
-
                         </div>
 
                     </form>
