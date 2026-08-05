@@ -70,12 +70,11 @@
                                     First Name
                                 </label>
 
-                                <input
-                                    type="text"
-                                    class="form-control"
-                                    id="firstName"
-                                    th:field="*{firstName}"
-                                    placeholder="Enter first name">
+                                <input type="text"
+                                       class="form-control"
+                                       id="firstName"
+                                       th:field="*{firstName}"
+                                       placeholder="Enter first name">
 
                                 <div class="field-error"
                                      th:if="${#fields.hasErrors('firstName')}"
@@ -91,12 +90,11 @@
                                     Last Name
                                 </label>
 
-                                <input
-                                    type="text"
-                                    class="form-control"
-                                    id="lastName"
-                                    th:field="*{lastName}"
-                                    placeholder="Enter last name">
+                                <input type="text"
+                                       class="form-control"
+                                       id="lastName"
+                                       th:field="*{lastName}"
+                                       placeholder="Enter last name">
 
                                 <div class="field-error"
                                      th:if="${#fields.hasErrors('lastName')}"
@@ -120,12 +118,11 @@
                                     <i class="bi bi-envelope"></i>
                                 </span>
 
-                                <input
-                                    type="email"
-                                    class="form-control"
-                                    id="email"
-                                    th:field="*{email}"
-                                    placeholder="Enter email address">
+                                <input type="email"
+                                       class="form-control"
+                                       id="email"
+                                       th:field="*{email}"
+                                       placeholder="Enter email address">
 
                             </div>
 
@@ -149,17 +146,16 @@
                                     <i class="bi bi-lock"></i>
                                 </span>
 
-                                <input
-                                    type="password"
-                                    class="form-control"
-                                    id="password"
-                                    th:field="*{password}"
-                                    placeholder="Enter password">
+                                <input type="password"
+                                       class="form-control"
+                                       id="password"
+                                       th:field="*{password}"
+                                       placeholder="Enter password">
 
                             </div>
 
                             <div class="form-text">
-                                Password must contain at least 8 characters.
+                                Password must be at least 8 characters.
                             </div>
 
                             <div class="field-error"
@@ -182,12 +178,11 @@
                                     <i class="bi bi-shield-lock"></i>
                                 </span>
 
-                                <input
-                                    type="password"
-                                    class="form-control"
-                                    id="confirmPassword"
-                                    th:field="*{confirmPassword}"
-                                    placeholder="Re-enter password">
+                                <input type="password"
+                                       class="form-control"
+                                       id="confirmPassword"
+                                       th:field="*{confirmPassword}"
+                                       placeholder="Re-enter password">
 
                             </div>
 
@@ -198,9 +193,8 @@
 
                         </div>
 
-                        <button
-                            type="submit"
-                            class="btn btn-stock w-100 py-2">
+                        <button type="submit"
+                                class="btn btn-stock w-100 py-2">
 
                             <i class="bi bi-person-plus me-2"></i>
                             Create Account
