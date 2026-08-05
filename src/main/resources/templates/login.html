@@ -47,45 +47,67 @@
                         </h1>
 
                         <p class="text-secondary">
-                            Sign in to manage Stock Society inventory.
+                            Sign in to access your Stock Society account.
                         </p>
 
                     </div>
 
                     <div class="alert alert-success"
-                        th:if="${param.registered}">
+                         th:if="${param.registered}">
+
                         <i class="bi bi-check-circle me-2"></i>
-                        Your account was created successfully. You can now log in.
+
+                        Your account was created successfully.
+                        You can now log in.
+
                     </div>
 
-                    <form th:action="@{/}"
-                          method="get">
+                    <div class="alert alert-danger"
+                         th:if="${param.error}">
+
+                        <i class="bi bi-exclamation-circle me-2"></i>
+
+                        The email or password you entered is incorrect.
+
+                    </div>
+
+                    <div class="alert alert-success"
+                         th:if="${param.logout}">
+
+                        <i class="bi bi-check-circle me-2"></i>
+
+                        You have been logged out successfully.
+
+                    </div>
+
+                    <form th:action="@{/login}"
+                          method="post">
 
                         <div class="mb-3">
 
-                            <label for="username"
+                            <label for="email"
                                    class="form-label">
-                                Username
+                                Email Address
                             </label>
 
                             <div class="input-group">
 
                                 <span class="input-group-text">
-                                    <i class="bi bi-person"></i>
+                                    <i class="bi bi-envelope"></i>
                                 </span>
 
                                 <input
-                                    type="text"
+                                    type="email"
                                     class="form-control"
-                                    id="username"
-                                    name="username"
-                                    placeholder="Enter username"
+                                    id="email"
+                                    name="email"
+                                    placeholder="Enter your email address"
+                                    autocomplete="email"
                                     required>
 
                             </div>
 
                         </div>
-
 
                         <div class="mb-3">
 
@@ -105,13 +127,13 @@
                                     class="form-control"
                                     id="password"
                                     name="password"
-                                    placeholder="Enter password"
+                                    placeholder="Enter your password"
+                                    autocomplete="current-password"
                                     required>
 
                             </div>
 
                         </div>
-
 
                         <button
                             type="submit"
@@ -119,18 +141,20 @@
 
                             <i class="bi bi-box-arrow-in-right me-2"></i>
                             Login
+
                         </button>
 
-
                         <div class="text-center mt-4">
+
                             <span class="text-secondary">
                                 Don’t have an account?
                             </span>
 
                             <a th:href="@{/register}"
-                            class="stock-link ms-1">
+                               class="stock-link ms-1">
                                 Create an account
                             </a>
+
                         </div>
 
                     </form>
@@ -145,7 +169,10 @@
 
 </main>
 
+<footer th:replace="~{fragments/layout :: footer}"></footer>
+
 <div th:replace="~{fragments/layout :: scripts}"></div>
 
 </body>
+
 </html>
