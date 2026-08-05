@@ -34,3 +34,7 @@ build/
 
 ### data.sql ###
 /data/
+
+data/*.mv.db
+data/*.trace.db
+target/

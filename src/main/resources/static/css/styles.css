@@ -410,6 +410,22 @@ body{
     text-decoration: underline;
 }
 
+/* REGISTRATION PAGE */
+
+.field-error {
+    color: #b42318;
+    font-size: 0.875rem;
+    font-weight: 500;
+    margin-top: 6px;
+}
+
+.form-text {
+    color: var(--stock-muted);
+}
+
+.alert {
+    border-radius: 10px;
+}
 
 /* RESPONSIVE DESIGN */
 

@@ -44,9 +44,4 @@ public class HomeController {
     public String services() {
         return "services";
     }
-
-    @GetMapping("/login")
-    public String login() {
-        return "login";
-    }
 }
