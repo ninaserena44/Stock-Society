@@ -32,8 +32,12 @@ public class SecurityConfig {
                                 "/images/**",
                                 "/h2-console/**"
                         ).permitAll()
-                        .anyRequest().permitAll()
+
+                        .requestMatchers("/admin/**").hasRole("ADMIN")
+
+                        .anyRequest().authenticated()
                 )
+
                 .formLogin(form -> form
                         .loginPage("/login")
                         .usernameParameter("email")
@@ -55,6 +59,7 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf
                         .ignoringRequestMatchers("/h2-console/**")
                 )
+
                 .headers(headers -> headers
                         .frameOptions(frame -> frame.sameOrigin())
                 );
