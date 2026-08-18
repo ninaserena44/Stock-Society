@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: stocksociety
+
+  profiles:
+    default: dev
+
+  jpa:
+    open-in-view: false
+
+server:
+  port: 8080
