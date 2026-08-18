@@ -2,6 +2,7 @@ package com.stocksociety.stocksociety.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -27,15 +28,43 @@ public class SecurityConfig {
                                 "/services",
                                 "/login",
                                 "/register",
+                                "/access-denied",
                                 "/css/**",
                                 "/js/**",
                                 "/images/**",
                                 "/h2-console/**"
                         ).permitAll()
 
-                        .requestMatchers("/admin/**").hasRole("ADMIN")
+                        // ADMIN only
+                        .requestMatchers("/admin/**")
+                        .hasRole("ADMIN")
 
-                        .anyRequest().authenticated()
+                        // Create item form
+                        .requestMatchers(HttpMethod.GET, "/items/new")
+                        .hasAnyRole("STAFF", "ADMIN")
+
+                        // Create item
+                        .requestMatchers(HttpMethod.POST, "/items")
+                        .hasAnyRole("STAFF", "ADMIN")
+
+                        // Edit item form
+                        .requestMatchers(HttpMethod.GET, "/items/*/edit")
+                        .hasAnyRole("STAFF", "ADMIN")
+
+                        // Delete MUST come before general POST /items/*
+                        .requestMatchers(HttpMethod.POST, "/items/*/delete")
+                        .hasRole("ADMIN")
+
+                        // Update item
+                        .requestMatchers(HttpMethod.POST, "/items/*")
+                        .hasAnyRole("STAFF", "ADMIN")
+
+                        // View items/details
+                        .requestMatchers(HttpMethod.GET, "/items/**")
+                        .authenticated()
+
+                        .anyRequest()
+                        .authenticated()
                 )
 
                 .formLogin(form -> form
@@ -54,6 +83,12 @@ public class SecurityConfig {
                         .clearAuthentication(true)
                         .deleteCookies("JSESSIONID")
                         .permitAll()
+                )
+
+                .exceptionHandling(exception -> exception
+                        .accessDeniedHandler((request, response, accessDeniedException) -> {
+                                response.sendRedirect("/access-denied");
+                        })
                 )
 
                 .csrf(csrf -> csrf
